@@ -24,7 +24,7 @@ class ScanResultTile extends StatelessWidget {
           ),
           Text(
             result.device.id.toString(),
-            style: Theme.of(context).textTheme.caption,
+            style: Theme.of(context).textTheme.bodySmall,
           )
         ],
       );
@@ -39,7 +39,7 @@ class ScanResultTile extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(title, style: Theme.of(context).textTheme.caption),
+          Text(title, style: Theme.of(context).textTheme.bodySmall),
           const SizedBox(
             width: 12.0,
           ),
@@ -48,7 +48,7 @@ class ScanResultTile extends StatelessWidget {
               value,
               style: Theme.of(context)
                   .textTheme
-                  .caption
+                  .bodySmall
                   ?.apply(color: Colors.black),
               softWrap: true,
             ),
@@ -94,8 +94,8 @@ class ScanResultTile extends StatelessWidget {
       trailing: ElevatedButton(
         child: const Text('CONNECT'),
         style: ElevatedButton.styleFrom(
-          primary: Colors.black,
-          onPrimary: Colors.white,
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.black,
         ),
         onPressed: (result.advertisementData.connectable) ? onTap : null,
       ),
@@ -136,9 +136,11 @@ class ServiceTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const Text('Service'),
-            Text('0x${service.uuid.toString().toUpperCase().substring(4, 8)}',
-                style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                    color: Theme.of(context).textTheme.caption?.color))
+            Text(
+              '0x${service.uuid.toString().toUpperCase().substring(4, 8)}',
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: Theme.of(context).textTheme.bodySmall?.color),
+            )
           ],
         ),
         children: characteristicTiles,
@@ -184,9 +186,10 @@ class CharacteristicTile extends StatelessWidget {
               children: <Widget>[
                 const Text('Characteristic'),
                 Text(
-                    '0x${characteristic.uuid.toString().toUpperCase().substring(4, 8)}',
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                        color: Theme.of(context).textTheme.caption?.color))
+                  '0x${characteristic.uuid.toString().toUpperCase().substring(4, 8)}',
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: Theme.of(context).textTheme.bodySmall?.color),
+                )
               ],
             ),
             subtitle: Text(value.toString()),
@@ -203,16 +206,17 @@ class CharacteristicTile extends StatelessWidget {
                 onPressed: onReadPressed,
               ),
               IconButton(
-                icon: Icon(Icons.file_upload,
-                    color: Theme.of(context).iconTheme.color?.withOpacity(0.5)),
+                icon: Icon(
+                  Icons.file_upload,
+                  color: Theme.of(context).iconTheme.color?.withOpacity(0.5),
+                ),
                 onPressed: onWritePressed,
               ),
               IconButton(
                 icon: Icon(
-                    characteristic.isNotifying
-                        ? Icons.sync_disabled
-                        : Icons.sync,
-                    color: Theme.of(context).iconTheme.color?.withOpacity(0.5)),
+                  characteristic.isNotifying ? Icons.sync_disabled : Icons.sync,
+                  color: Theme.of(context).iconTheme.color?.withOpacity(0.5),
+                ),
                 onPressed: onNotificationPressed,
               )
             ],
@@ -244,11 +248,13 @@ class DescriptorTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           const Text('Descriptor'),
-          Text('0x${descriptor.uuid.toString().toUpperCase().substring(4, 8)}',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText1
-                  ?.copyWith(color: Theme.of(context).textTheme.caption?.color))
+          Text(
+            '0x${descriptor.uuid.toString().toUpperCase().substring(4, 8)}',
+            style: Theme.of(context)
+                .textTheme
+                .bodyLarge
+                ?.copyWith(color: Theme.of(context).textTheme.bodySmall?.color),
+          )
         ],
       ),
       subtitle: StreamBuilder<List<int>>(
@@ -291,11 +297,11 @@ class AdapterStateTile extends StatelessWidget {
       child: ListTile(
         title: Text(
           'Bluetooth adapter is ${state.toString().substring(15)}',
-          style: Theme.of(context).primaryTextTheme.subtitle2,
+          style: Theme.of(context).primaryTextTheme.titleSmall,
         ),
         trailing: Icon(
           Icons.error,
-          color: Theme.of(context).primaryTextTheme.subtitle2?.color,
+          color: Theme.of(context).primaryTextTheme.titleSmall?.color,
         ),
       ),
     );
